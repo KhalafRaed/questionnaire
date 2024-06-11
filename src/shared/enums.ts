@@ -1,10 +1,3 @@
-export enum QuestionType {
-  YesNo = 'YesNo',
-  Number = 'Number',
-  Text = 'Text',
-  Select = 'Select',
-}
-
 export enum ComparisonOperations {
   MoreThan = 'MoreThan',
   MoreThanOrEqual = 'MoreThanOrEqual',

@@ -1,30 +1,13 @@
-import { ComparisonOperations, QuestionType } from '@/shared/enums.ts';
+import { ComparisonOperations } from '@/shared/enums.ts';
 
 export interface Question {
   id: number;
   question: string;
-  type: QuestionType;
-  answer: string | number;
-}
-
-export interface YesNoQuestion extends Question {
-  goToIfYes: number;
-  goToIfNo: number;
-}
-
-export interface NumberQuestion extends Question {
-  rules: {
+  type: 'YesNo' | 'Number' | 'Select' | 'Text'; // Add more types as needed
+  answer?: string | number;
+  conditions?: {
     comparisonOperation: ComparisonOperations;
-    goToIfSatisfied: number;
-    goToOtherwise: number;
+    answer: string | number;
+    goTo: number; // Go-to if specific answer is given
   }[];
 }
-
-export interface SelectQuestion extends Question {
-  options: {
-    label: string;
-    goTo: number;
-  }[];
-}
-
-export interface TextQuestion extends Question {}

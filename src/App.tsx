@@ -27,11 +27,11 @@ function App() {
   }
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden">
-      <div className="w-2/3">
+    <div className="flex h-screen w-screen overflow-hidden font-mono">
+      <div className="w-2/3 bg-green-50">
         <Questions />
       </div>
-      <div className="w-1/3">
+      <div className="w-1/3 bg-blue-50">
         <QuestionsList />
       </div>
     </div>
