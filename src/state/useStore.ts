@@ -4,10 +4,11 @@ import { create } from 'zustand';
 interface QuestionsState {
   finished: boolean;
   questions: Question[];
-  activeQuestion: Question | null; // Track the active question
+  isLoading: boolean;
+  activeQuestion: Question | null;
+  activeQuestionIndex: number | null;
   setQuestions: (questions: Question[]) => void;
   updateQuestion: (id: number, answer: string | number) => void;
-  isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
   setActiveQuestion: (index: number | null) => void;
   goToQuestion: (index: number) => void;
@@ -19,6 +20,7 @@ interface QuestionsState {
 const useQuestionsStore = create<QuestionsState>((set) => ({
   questions: [],
   activeQuestion: null,
+  activeQuestionIndex: 0,
   isLoading: false,
   finished: false,
   setIsLoading: (isLoading) => set({ isLoading }),
@@ -34,6 +36,7 @@ const useQuestionsStore = create<QuestionsState>((set) => ({
       const question = index !== null ? state.questions[index] : null;
       return {
         activeQuestion: question,
+        activeQuestionIndex: index,
       };
     });
   },
@@ -42,6 +45,7 @@ const useQuestionsStore = create<QuestionsState>((set) => ({
       const question = state.questions[index];
       return {
         activeQuestion: question,
+        activeQuestionIndex: index,
       };
     });
   },
@@ -54,6 +58,7 @@ const useQuestionsStore = create<QuestionsState>((set) => ({
           const nextQuestion = state.questions[nextIndex];
           return {
             activeQuestion: nextQuestion,
+            activeQuestionIndex: nextIndex,
           };
         } else {
           return {
@@ -73,6 +78,7 @@ const useQuestionsStore = create<QuestionsState>((set) => ({
           const previousQuestion = state.questions[previousIndex];
           return {
             activeQuestion: previousQuestion,
+            activeQuestionIndex: previousIndex,
           };
         }
       }
